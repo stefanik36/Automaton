@@ -1,0 +1,52 @@
+
+.gameOfLifeContainer{
+	-fx-background-color: #4A068A;
+}
+.langtonsAntContainer{
+    -fx-background-color: #A684A0;
+}
+.wireworldContainer{
+    -fx-background-color: #D0F100;
+}
+.menuContainer{
+    -fx-background-color: #4A068A;
+}
+
+/*
+.rect {
+	-fx-border-radius: 4px;
+    -fx-border-width: 2;
+ 	-fx-background-color: transparent;
+    -fx-border-color: #ff0080;
+    -fx-text-fill: #ff0080;
+}
+.button {
+ 	
+    -fx-border-radius: 4px;
+    -fx-border-width: 2;
+ 	-fx-background-color: transparent;
+    -fx-border-color: #ff0080;
+    -fx-text-fill: #ff0080;
+}
+.button:hover{
+ 	-fx-background-color: #ff0080;
+    -fx-border-color: #ff0080;
+    -fx-text-fill: #4A068A;
+}
+
+.circleExternal{
+	-fx-background-color:  transparent;
+	-fx-background-color: #8FF6A9;
+    -fx-border-radius: 4px;
+    -fx-border-width: 2;
+ 	-fx-background-color: transparent;
+    -fx-border-color: #ff0080;
+    -fx-text-fill: #ff0080;
+    -fx-background-color: red;
+}
+.circleInternal{
+	-fx-border-radius: 4px;
+    -fx-border-width: 2;
+ 	-fx-background-color: radial-gradient(radius 100%, red, darkgray, black);
+    -fx-background-color: red;
+}*/

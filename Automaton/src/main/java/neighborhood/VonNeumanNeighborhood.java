@@ -1,22 +1,34 @@
-package Application;
+package neighborhood;
 
 import java.util.Set;
 
-import Exceptions.UndefiniedInstanceOfCellException;
+import application.Automaton;
+import application.Automaton2Dim;
+import application.BoardType;
+import application.GameOfLife;
+import coordinates.CellCoordinates;
+import coordinates.Coords1D;
+import coordinates.Coords2D;
+import exceptions.UndefiniedInstanceOfCellException;
 
 import java.util.HashSet;
 
 public class VonNeumanNeighborhood implements CellNeighborhood{
 
+	//ADDED//
 	public int range;
-	
+	private int distanceToNeighbor = 1;
 	public VonNeumanNeighborhood(int range) {
 		setRange(range);
 	}
+	public void setRange(int range){
+		this.range = range;
+	}
+	
+	//END//
 	
 	@Override
 	public Set<CellCoordinates> cellNeighborhood(CellCoordinates cell) {
-		int distanceToNeighbor = Automaton.DISTANCE_TO_NEIGHBORS;
 		boolean boardWrapped = BoardType.boardWrapped;
 		Set<CellCoordinates> cellNeighbors = new HashSet<CellCoordinates>();   // -------------------------------HASH SET ------------------------//
 		
@@ -37,19 +49,16 @@ public class VonNeumanNeighborhood implements CellNeighborhood{
 					if(gameOfLife.xIsOutOfBoard(newX)){
 						if(!boardWrapped)
 							continue;
-						newX = wrapCoordinate(distanceToNeighbor, boardWidth, horizontal);				
+						newX = wrapCoordinate(distanceToNeighbor, boardWidth, horizontal);	//in interface (default)//			
 					}
 					newY = cell2D.getY() + distanceToNeighbor*vertical;
 					if(gameOfLife.yIsOutOfBoard(newY)){
 						if(!boardWrapped)
 							continue;
-						newY = wrapCoordinate(distanceToNeighbor, boardHeight, vertical);					
+						newY = wrapCoordinate(distanceToNeighbor, boardHeight, vertical);	//in interface (default)//					
 					}
 					CellCoordinates coords = new Coords2D(newX, newY);
-					cellNeighbors.add(coords);
-					System.out.println(coords);
-					
-					
+					cellNeighbors.add(coords);					
 				}
 				if(vertical>=0)
 					i--;
@@ -83,17 +92,5 @@ public class VonNeumanNeighborhood implements CellNeighborhood{
 		return cellNeighbors;
 	}
 
-	private int wrapCoordinate(int distanceToNeighbor, int length, int position) {
-		int coord;
-		if(position>0)
-			coord = distanceToNeighbor/2 + distanceToNeighbor*position;
-		else
-			coord = length + distanceToNeighbor/2 + distanceToNeighbor*position;
-		return coord;
-	}
-	
-	public void setRange(int range){
-		this.range = range;
-	}
 
 }
