@@ -1,5 +1,5 @@
 
-.gameOfLifeContainer{
+.agameOfLifeContainer{
 	-fx-background-color: #4A068A;
 }
 .langtonsAntContainer{
@@ -12,7 +12,11 @@
     -fx-background-color: #4A068A;
 }
 
-/*
+.root{
+
+    -fx-background-color: #4A068A;
+}
+
 .rect {
 	-fx-border-radius: 4px;
     -fx-border-width: 2;
@@ -21,7 +25,6 @@
     -fx-text-fill: #ff0080;
 }
 .button {
- 	
     -fx-border-radius: 4px;
     -fx-border-width: 2;
  	-fx-background-color: transparent;
@@ -49,4 +52,4 @@
     -fx-border-width: 2;
  	-fx-background-color: radial-gradient(radius 100%, red, darkgray, black);
     -fx-background-color: red;
-}*/
+}

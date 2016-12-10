@@ -1,4 +1,6 @@
-package Application;
+package states;
+
+import coordinates.CellCoordinates;
 
 public interface CellStateFactory {
 	

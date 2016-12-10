@@ -3,11 +3,6 @@ package gui;
 import java.util.ArrayList;
 
 import application.Automaton;
-import application.BinaryState;
-import application.CellState;
-import application.CellStateFactory;
-import application.GeneralStateFactory;
-import application.UniformStateFactory;
 import coordinates.CellCoordinates;
 import coordinates.Coords1D;
 import coordinates.Coords2D;
@@ -17,6 +12,11 @@ import javafx.scene.Group;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import states.BinaryState;
+import states.CellState;
+import states.CellStateFactory;
+import states.GeneralStateFactory;
+import states.UniformStateFactory;
 
 
 public class EventHandlers implements EventHandler<MouseEvent>{
