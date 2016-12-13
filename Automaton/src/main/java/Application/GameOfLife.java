@@ -26,12 +26,14 @@ import neighborhood.CellNeighborhood;
 import states.BinaryState;
 import states.CellState;
 import states.CellStateFactory;
-public class GameOfLife extends Automaton2Dim{
 
-	//ADDED//
+public class GameOfLife extends Automaton2Dim {
+
+	// ADDED//
 	private List<Integer> survivors;
 	private List<Integer> comeAlive;
 	private Structure structureType;
+
 	public List<Integer> getComeAlive() {
 		return comeAlive;
 	}
@@ -47,69 +49,68 @@ public class GameOfLife extends Automaton2Dim{
 	public void setSurvivors(List<Integer> survivors) {
 		this.survivors = survivors;
 	}
-	
+
 	@Override
 	public void setStructure(StructureType struct) {
 		structureType = new Structure();
 		structureType.setSType(struct);
 	}
-	
-	public GameOfLife(){
-		
+
+	public GameOfLife() {
+
 	}
 
-	public GameOfLife(CellStateFactory cellStateFactory, CellNeighborhood cellNeighboorhood){
+	public GameOfLife(CellStateFactory cellStateFactory, CellNeighborhood cellNeighboorhood) {
 		setNeighborhoodAndstateFactory(cellNeighboorhood, cellStateFactory);
 		fillTheMap(cellStateFactory);
 		structureType = new Structure();
 		structureType.setSType(StructureType.SIMPLE);
-		Integer[] survivorsA  = {2, 3};
-		Integer[] comeAliveA  = {3};
+		Integer[] survivorsA = { 2, 3 };
+		Integer[] comeAliveA = { 3 };
 		survivors = new ArrayList<Integer>(Arrays.asList(survivorsA));
 		comeAlive = new ArrayList<Integer>(Arrays.asList(comeAliveA));
 	}
-	//END//
-	
+	// END//
+
 	@Override
 	protected Automaton newInstance(CellStateFactory stateFactory, CellNeighborhood neighborsStrategy) {
 
-		Automaton game = new GameOfLife(); 
+		Automaton game = new GameOfLife();
 		game.setNeighborhoodAndstateFactory(neighborsStrategy, stateFactory);
 		game.fillTheMap(stateFactory);
 		game.setStructureType(structureType);
-		((GameOfLife)game).setSurvivors(survivors);
-		((GameOfLife)game).setComeAlive(comeAlive);
-		return game;		
+		((GameOfLife) game).setSurvivors(survivors);
+		((GameOfLife) game).setComeAlive(comeAlive);
+		return game;
 	}
 
 	@Override
-	protected CellState nextCellState(CellState currentState, Set<Cell> neighborsStates) throws InvalidCellStateInstance {
-		
-		if(currentState instanceof BinaryState){
-			BinaryState state = (BinaryState)currentState;
-			if(state.equals(BinaryState.ALIVE)){
+	protected CellState nextCellState(CellState currentState, Set<Cell> neighborsStates)
+			throws InvalidCellStateInstance {
+
+		if (currentState instanceof BinaryState) {
+			BinaryState state = (BinaryState) currentState;
+			if (state.equals(BinaryState.ALIVE)) {
 				return getNewState(neighborsStates, survivors);
-			}
-			else{
+			} else {
 				return getNewState(neighborsStates, comeAlive);
 			}
-		}
-		else{
+		} else {
 			throw new InvalidCellStateInstance("Instance of cell state is invalid.");
 		}
 
 	}
-	
-	//ADDED//
+
+	// ADDED//
 	@Override
-	public void fillTheMap(CellStateFactory cellStateFactory){
+	public void fillTheMap(CellStateFactory cellStateFactory) {
 		CellCoordinates coords = initialCoordinates();
 		try {
-			while(hasNextCoordinates(coords)){		
+			while (hasNextCoordinates(coords)) {
 				coords = nextCoordinates(coords);
-				putCell(coords, cellStateFactory.initialState(coords)); 
+				putCell(coords, cellStateFactory.initialState(coords));
 			}
-		}catch (CoordinatesOutOfBoardException e) {
+		} catch (CoordinatesOutOfBoardException e) {
 			e.printStackTrace();
 		} catch (UndefiniedInstanceOfCellException e) {
 			e.printStackTrace();
@@ -119,57 +120,58 @@ public class GameOfLife extends Automaton2Dim{
 			e.printStackTrace();
 		} catch (InvalidCellCoordinatesInstanceException e) {
 			e.printStackTrace();
-		} 
+		}
 	}
-	
-	private CellState getNewState(Set<Cell> neighborsStates, List<Integer> criteria){
-		int numberOfAliveNeighbors=0;
-		for(Cell c : neighborsStates){
-			if(c.state.equals(BinaryState.ALIVE)){
+
+	private CellState getNewState(Set<Cell> neighborsStates, List<Integer> criteria) {
+		int numberOfAliveNeighbors = 0;
+		for (Cell c : neighborsStates) {
+			if (c.state.equals(BinaryState.ALIVE)) {
 				numberOfAliveNeighbors++;
 			}
 		}
-		if(criteria.contains(new Integer(numberOfAliveNeighbors))){
+		if (criteria.contains(new Integer(numberOfAliveNeighbors))) {
 			return BinaryState.ALIVE;
 		}
 		return BinaryState.DEAD;
 	}
-	
+
 	@Override
 	public Group getCellShape(Cell c) throws InvalidCellCoordinatesInstanceException {
 		Group cellShape = new Group();
-		if(c.coords instanceof Coords2D){
-			Coords2D c2D = (Coords2D)c.coords;
-			BinaryState bState = (BinaryState)c.state;
-			int x = c2D.getX()*AutomatonGUI.DISTANCE_TO_NEIGHBORS-AutomatonGUI.DISTANCE_TO_NEIGHBORS/2;
-			int y = c2D.getY()*AutomatonGUI.DISTANCE_TO_NEIGHBORS-AutomatonGUI.DISTANCE_TO_NEIGHBORS/2;
-			Circle eCircle = new Circle(x, y,AutomatonGUI.EXTERNAL_CELL_RADIUS, Color.BLACK);
+		if (c.coords instanceof Coords2D) {
+			Coords2D c2D = (Coords2D) c.coords;
+			BinaryState bState = (BinaryState) c.state;
+			int x = c2D.getX() * AutomatonGUI.DISTANCE_TO_NEIGHBORS - AutomatonGUI.DISTANCE_TO_NEIGHBORS / 2;
+			int y = c2D.getY() * AutomatonGUI.DISTANCE_TO_NEIGHBORS - AutomatonGUI.DISTANCE_TO_NEIGHBORS / 2;
+			Circle eCircle = new Circle(x, y, AutomatonGUI.EXTERNAL_CELL_RADIUS, Color.BLACK);
 			cellShape.getChildren().add(eCircle);
-			if(bState.equals(BinaryState.DEAD)){
+			if (bState.equals(BinaryState.DEAD)) {
 				Circle iCircle = new Circle(x, y, AutomatonGUI.INTERNAL_CELL_RADIUS, Color.WHITE);
 				cellShape.getChildren().add(iCircle);
 			}
 			return cellShape;
-		}
-		else if(c.coords instanceof Coords1D){
-			Coords1D c1D = (Coords1D)c.coords;
-			BinaryState bState = (BinaryState)c.state;
-			int x = c1D.getX()*AutomatonGUI.DISTANCE_TO_NEIGHBORS-AutomatonGUI.DISTANCE_TO_NEIGHBORS/2;
-			Circle eCircle = new Circle(x, AutomatonGUI.DISTANCE_TO_NEIGHBORS/2,AutomatonGUI.EXTERNAL_CELL_RADIUS, Color.BLACK);
+		} else if (c.coords instanceof Coords1D) {
+			Coords1D c1D = (Coords1D) c.coords;
+			BinaryState bState = (BinaryState) c.state;
+			int x = c1D.getX() * AutomatonGUI.DISTANCE_TO_NEIGHBORS - AutomatonGUI.DISTANCE_TO_NEIGHBORS / 2;
+			Circle eCircle = new Circle(x, AutomatonGUI.DISTANCE_TO_NEIGHBORS / 2, AutomatonGUI.EXTERNAL_CELL_RADIUS,
+					Color.BLACK);
 			cellShape.getChildren().add(eCircle);
-			if(bState.equals(BinaryState.DEAD)){
-				Circle iCircle = new Circle(x, AutomatonGUI.DISTANCE_TO_NEIGHBORS/2,AutomatonGUI.INTERNAL_CELL_RADIUS, Color.WHITE);
+			if (bState.equals(BinaryState.DEAD)) {
+				Circle iCircle = new Circle(x, AutomatonGUI.DISTANCE_TO_NEIGHBORS / 2,
+						AutomatonGUI.INTERNAL_CELL_RADIUS, Color.WHITE);
 				cellShape.getChildren().add(iCircle);
 			}
 			return cellShape;
-		}
-		else{
+		} else {
 			throw new InvalidCellCoordinatesInstanceException("Unknown cell coordinates instance.");
 		}
 	}
 
 	@Override
-	public Map<? extends CellCoordinates, ? extends CellState> getStructure(CellCoordinates cellCoords) throws InvalidStructureTypeException, InvalidGameInstance {
+	public Map<? extends CellCoordinates, ? extends CellState> getStructure(CellCoordinates cellCoords)
+			throws InvalidStructureTypeException, InvalidGameInstance {
 		return structureType.getStructure(cellCoords, this);
 	}
 
@@ -184,16 +186,17 @@ public class GameOfLife extends Automaton2Dim{
 	}
 
 	public void changeSurvivor(int i) {
-		if(survivors.contains(new Integer(i)))
+		if (survivors.contains(new Integer(i)))
 			survivors.remove(new Integer(i));
 		else
 			survivors.add(i);
 	}
+
 	public void changeComeAlive(int i) {
-		if(comeAlive.contains(new Integer(i)))
+		if (comeAlive.contains(new Integer(i)))
 			comeAlive.remove(new Integer(i));
 		else
 			comeAlive.add(i);
 	}
-	//END//
+	// END//
 }
