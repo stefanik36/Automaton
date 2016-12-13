@@ -1,8 +1,5 @@
 package application;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -10,7 +7,6 @@ import application.Structure.StructureType;
 import cells.Cell;
 import coordinates.CellCoordinates;
 import coordinates.Coords1D;
-import coordinates.Coords2D;
 import exceptions.CoordinatesOutOfBoardException;
 import exceptions.InvalidCellCoordinatesInstanceException;
 import exceptions.InvalidCellStateFactoryException;
@@ -26,28 +22,43 @@ import neighborhood.CellNeighborhood;
 import states.BinaryState;
 import states.CellState;
 import states.CellStateFactory;
-import states.LangtonCell;
 
 public class ElementaryCellAutomaton extends Automaton1Dim{
 	
-	//public final Integer[] rulesOrder  = {111,110,101,100,011,010,001,000};
-//	{1,0,1,0,0,1,0,1}; 
-	public Integer[] rule  = {1,0,1,0,0,1,0,1};
+	private int[] rule = new int[8];
 	public int generation; 
 	
 	private Structure structureType;
 	public ElementaryCellAutomaton() {
-//		generation = 0;
+		
 	}
 	public ElementaryCellAutomaton(CellStateFactory cellStateFactory, CellNeighborhood cellNeighboorhood) {
 		setNeighborhoodAndstateFactory(cellNeighboorhood, cellStateFactory);
 		fillTheMap(cellStateFactory);
 		structureType = new Structure();
 		structureType.setSType(StructureType.SIMPLE);
-		System.out.println("gen: "+generation);
-//		generation = 0;
+		setRule(165); //default rule is 165
 	}
 	
+	public void setRule(int value){
+		int tmp = value;
+		for(int it=rule.length-1;it>=0;it--){
+			rule[it]=tmp%2;
+			tmp= tmp/2;
+		}
+	}
+
+	private void setRule(int[] oldRule) {
+		for(int it=0;it<rule.length;it++){
+			rule[it] = oldRule[it];
+		}
+		
+	}
+	@Override
+	public void setStructure(StructureType struct) {
+		structureType = new Structure();
+		structureType.setSType(struct);
+	}
 	
 	@Override
 	protected Automaton newInstance(CellStateFactory cellStateFactory, CellNeighborhood cellNeighboorhood) {
@@ -59,6 +70,7 @@ public class ElementaryCellAutomaton extends Automaton1Dim{
 			
 			ElementaryCellAutomaton ecaGame = ((ElementaryCellAutomaton)game);
 			int gen = this.generation+1;
+			ecaGame.setRule(rule);
 			if(gen<ecaGame.getWidth()){
 				ecaGame.generation = gen;
 				return ecaGame;
@@ -118,67 +130,63 @@ public class ElementaryCellAutomaton extends Automaton1Dim{
 		else if(cellsCoordinates[0].getX() < cellsCoordinates[1].getX()){
 			return checkRules(cellsStates, 1, 0, middleIsAlive);
 		}
-		else{
-			System.out.println(" ----------------------------------------------------------------ELEMENTARY CELL ------------------------------------------------UPS=--- ");
-		}
 		return null;
 	}
+	/**
+	 * 
+	 * check {@link ElementaryCellAutomaton} rules.
+	 * 
+	 *    0   1   2   3   4   5   6   7
+	 * 	{111,110,101,100,011,010,001,000};
+	 * 
+	 * 
+	 */
 	private CellState checkRules(BinaryState[] cellsStates, int left, int right, boolean positiveCenter) {
-		if(cellsStates[left] == BinaryState.ALIVE){      //  0   1   2   3   4   5   6   7
-			if(cellsStates[right] == BinaryState.ALIVE){ //{111,110,101,100,011,010,001,000};
-				if(positiveCenter){//111
+		
+		if(cellsStates[left] == BinaryState.ALIVE){     		 
+			if(cellsStates[right] == BinaryState.ALIVE){
+				if(positiveCenter)		//111
 					return checkRule(0);
-				}
-				else{				//101
+				else					//101
 					return checkRule(2);
-				}
-				
 			}
 			else{
-				if(positiveCenter){//110
+				if(positiveCenter)		//110
 					return checkRule(1);
-				}
-				else{				//100
+				else   					//100
 					return checkRule(3);
-				}
 			}
 		}
 		else{
 			if(cellsStates[right] == BinaryState.ALIVE){
-				if(positiveCenter){//011
+				if(positiveCenter)		//011
 					return checkRule(4);
-				}
-				else{				//001
+				else					//001
 					return checkRule(6);
-				}
 			}
 			else{
-				if(positiveCenter){//010
+				if(positiveCenter)		//010
 					return checkRule(5);
-				}
-				else{				//000
+				else					//000
 					return checkRule(7);
-				}
 			}
 		}
 	}
 	private CellState checkRule(int value) {
-		if(rule[value] == 0){
+		if(rule[value] == 0)
 			return BinaryState.DEAD;
-		}
-		else{
+		else
 			return BinaryState.ALIVE;
-		}
 	}
 
 	@Override
-	public Map<? extends CellCoordinates, ? extends CellState> getStructure(CellCoordinates cellCoords) throws InvalidStructureTypeException {
+	public Map<? extends CellCoordinates, ? extends CellState> getStructure(CellCoordinates cellCoords) throws InvalidStructureTypeException, InvalidGameInstance {
 		return structureType.getStructure(cellCoords, this);
 	}
 
 	@Override
-	public Structure getStructureType() {
-		return structureType;
+	public StructureType getStructureType() {
+		return structureType.sType;
 	}
 
 	@Override
@@ -187,7 +195,7 @@ public class ElementaryCellAutomaton extends Automaton1Dim{
 	}
 
 	@Override
-	protected void fillTheMap(CellStateFactory cellStateFactory) {
+	public void fillTheMap(CellStateFactory cellStateFactory) {
 		CellCoordinates coords = initialCoordinates();
 			try {
 				while(hasNextCoordinates(coords)){		
@@ -205,7 +213,6 @@ public class ElementaryCellAutomaton extends Automaton1Dim{
 			} catch (InvalidCellCoordinatesInstanceException e) {
 				e.printStackTrace();
 			}
-		
 	}
 
 	@Override

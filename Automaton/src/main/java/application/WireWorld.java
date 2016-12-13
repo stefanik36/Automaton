@@ -23,11 +23,9 @@ import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import neighborhood.CellNeighborhood;
-import states.AntState;
 import states.BinaryState;
 import states.CellState;
 import states.CellStateFactory;
-import states.LangtonCell;
 import states.WireElectronState;
 
 public class WireWorld extends Automaton2Dim{
@@ -38,6 +36,12 @@ public class WireWorld extends Automaton2Dim{
 	private Integer[] getHeadsA  = {1,2};
 	public List<Integer> getHeads = new ArrayList<Integer>(Arrays.asList(getHeadsA));
 	private Structure structureType;
+	
+	@Override
+	public void setStructure(StructureType struct) {
+		structureType = new Structure();
+		structureType.setSType(struct);
+	}
 	public WireWorld(){
 		
 	}
@@ -89,7 +93,6 @@ public class WireWorld extends Automaton2Dim{
 				}
 			}
 			return WireElectronState.WIRE;
-		
 		}
 		else{
 			return state;
@@ -97,23 +100,22 @@ public class WireWorld extends Automaton2Dim{
 	}
 
 	@Override
-	public Map<? extends CellCoordinates, ? extends CellState> getStructure(CellCoordinates cellCoords) throws InvalidStructureTypeException {
+	public Map<? extends CellCoordinates, ? extends CellState> getStructure(CellCoordinates cellCoords) throws InvalidStructureTypeException, InvalidGameInstance {
 		return structureType.getStructure(cellCoords, this);
 	}
 
 	@Override
-	public Structure getStructureType() {
-		return structureType;
+	public StructureType getStructureType() {
+		return structureType.sType;
 	}
 
 	@Override
 	public void setStructureType(Structure structureType) {
 		this.structureType = structureType;
-		
 	}
 
 	@Override
-	protected void fillTheMap(CellStateFactory cellStateFactory) {
+	public void fillTheMap(CellStateFactory cellStateFactory) {
 		CellCoordinates coords = initialCoordinates();
 		try {
 			while(hasNextCoordinates(coords)){		
@@ -121,19 +123,14 @@ public class WireWorld extends Automaton2Dim{
 				putCell(coords, cellStateFactory.initialState(coords));
 			}
 		} catch (UndefiniedInstanceOfCellException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (CoordinatesOutOfBoardException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (InvalidCellStateFactoryException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (InvalidGameInstance e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (InvalidCellCoordinatesInstanceException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -149,7 +146,6 @@ public class WireWorld extends Automaton2Dim{
 			int y = c2D.getY()*AutomatonGUI.DISTANCE_TO_NEIGHBORS-AutomatonGUI.DISTANCE_TO_NEIGHBORS/2;
 			
 			Circle eCircle;
-			
 					
 			if(wireState == WireElectronState.WIRE){
 				eCircle = new Circle(x, y, AutomatonGUI.EXTERNAL_CELL_RADIUS, Color.YELLOW);

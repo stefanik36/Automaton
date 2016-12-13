@@ -3,7 +3,6 @@ package coordinates;
 public class Coords1D implements CellCoordinates{
 
 	public int x;
-	
 	public Coords1D(int x){
 		this.x = x;
 	}
@@ -30,7 +29,6 @@ public class Coords1D implements CellCoordinates{
 		result = prime * result +  Integer.valueOf(x).hashCode();
 		return result;
 	}
-
 	
 	@Override
 	public String toString() {

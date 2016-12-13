@@ -25,10 +25,8 @@ public class Coords2D implements CellCoordinates{
 	public int hashCode(){
 		final int prime = 31;
 		int result = 1;
-		result = prime * result +  Integer.valueOf(x).hashCode();
-		result = prime * result +  Integer.valueOf(y).hashCode();
-//		result = result*x;
-//		result = result*y;
+		result = prime * result + Integer.valueOf(x).hashCode();
+		result = prime * result + Integer.valueOf(y).hashCode();
 		return result;
 	}
 	
