@@ -17,5 +17,7 @@ public interface CellNeighborhood {
 			coord = length + distanceToNeighbor + distanceToNeighbor*position;
 		return coord;
 	}
+	
+	public abstract int getNumberOfNeighbors();
 	//END//
 }
