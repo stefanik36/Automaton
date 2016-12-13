@@ -7,7 +7,7 @@ import exceptions.UndefiniedInstanceOfCellException;
 
 public abstract class Automaton1Dim extends Automaton {
 
-	private int width = 30;
+	private int width = 40;
 	private int distanceToNeighbor = 1;
 	private int firstCellX = distanceToNeighbor;
 	private int lastCellX = width;
