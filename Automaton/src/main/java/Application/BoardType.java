@@ -7,6 +7,5 @@ public class BoardType {
 	public static void setBoardWrapped(boolean boardWrapped) {
 		BoardType.boardWrapped = boardWrapped;
 	}
-	
-	
+
 }

@@ -53,14 +53,14 @@ public class Structure {
 		}
 		return structure;
 	}
-	
+
 	private void createAndWW(CellCoordinates coords, Automaton game, Map<CellCoordinates, CellState> structure) {
 		WireWorld tmpGame = (WireWorld) game;
 		int boardHeight = tmpGame.getHeight();
 		int boardWidth = tmpGame.getWidth();
 		createOrGate(coords, structure, boardHeight, boardWidth);
 	}
-	
+
 	private void createGliderGOF(CellCoordinates coords, Automaton game, Map<CellCoordinates, CellState> structure) {
 		GameOfLife tmpGame = (GameOfLife) game;
 		int boardHeight = tmpGame.getHeight();
@@ -81,7 +81,7 @@ public class Structure {
 		int boardWidth = tmpGame.getWidth();
 		createGliderGun(coords, structure, boardHeight, boardWidth);
 	}
-	
+
 	private void createGliderGunQL(CellCoordinates coords, Automaton game, Map<CellCoordinates, CellState> structure) {
 		QuadLife tmpGame = (QuadLife) game;
 		int boardHeight = tmpGame.getHeight();
@@ -94,124 +94,90 @@ public class Structure {
 		Coords2D c2D = (Coords2D) coords;
 		int rangeV = 4;
 		int rangeH = 18;
-		
+
 		for (int vertical = -rangeV; vertical <= rangeV; vertical++) {
 
 			for (int horizontal = -rangeH; horizontal <= rangeH; horizontal++) {
 				if ((vertical == 1) && (horizontal == 0)) {
 					putSingleCoords(structure, boardWidth, boardHeight, c2D, vertical, horizontal);
-				}
-				else if ((vertical == 0) && (horizontal == -1)) {
+				} else if ((vertical == 0) && (horizontal == -1)) {
 					putSingleCoords(structure, boardWidth, boardHeight, c2D, vertical, horizontal);
-				}
-				else if ((vertical == 1) && (horizontal == -1)) {
+				} else if ((vertical == 1) && (horizontal == -1)) {
 					putSingleCoords(structure, boardWidth, boardHeight, c2D, vertical, horizontal);
-				}
-				else if ((vertical == 2) && (horizontal == -1)) {
+				} else if ((vertical == 2) && (horizontal == -1)) {
 					putSingleCoords(structure, boardWidth, boardHeight, c2D, vertical, horizontal);
-				}
-				else if ((vertical == -1) && (horizontal == -2)) {
+				} else if ((vertical == -1) && (horizontal == -2)) {
 					putSingleCoords(structure, boardWidth, boardHeight, c2D, vertical, horizontal);
-				}
-				else if ((vertical == 3) && (horizontal == -2)) {
+				} else if ((vertical == 3) && (horizontal == -2)) {
 					putSingleCoords(structure, boardWidth, boardHeight, c2D, vertical, horizontal);
-				}
-				else if ((vertical == 1) && (horizontal == -3)) {
+				} else if ((vertical == 1) && (horizontal == -3)) {
 					putSingleCoords(structure, boardWidth, boardHeight, c2D, vertical, horizontal);
-				}
-				else if ((vertical == -2) && (horizontal == -4)) {
+				} else if ((vertical == -2) && (horizontal == -4)) {
 					putSingleCoords(structure, boardWidth, boardHeight, c2D, vertical, horizontal);
-				}
-				else if ((vertical == 4) && (horizontal == -4)) {
+				} else if ((vertical == 4) && (horizontal == -4)) {
 					putSingleCoords(structure, boardWidth, boardHeight, c2D, vertical, horizontal);
-				}
-				else if ((vertical == -2) && (horizontal == -5)) {
+				} else if ((vertical == -2) && (horizontal == -5)) {
 					putSingleCoords(structure, boardWidth, boardHeight, c2D, vertical, horizontal);
-				}
-				else if ((vertical == 4) && (horizontal == -5)) {
+				} else if ((vertical == 4) && (horizontal == -5)) {
 					putSingleCoords(structure, boardWidth, boardHeight, c2D, vertical, horizontal);
-				}
-				else if ((vertical == -1) && (horizontal == -6)) {
+				} else if ((vertical == -1) && (horizontal == -6)) {
 					putSingleCoords(structure, boardWidth, boardHeight, c2D, vertical, horizontal);
-				}
-				else if ((vertical == 3) && (horizontal == -6)) {
+				} else if ((vertical == 3) && (horizontal == -6)) {
 					putSingleCoords(structure, boardWidth, boardHeight, c2D, vertical, horizontal);
-				}
-				else if ((vertical == 1) && (horizontal == -7)) {
+				} else if ((vertical == 1) && (horizontal == -7)) {
 					putSingleCoords(structure, boardWidth, boardHeight, c2D, vertical, horizontal);
-				}
-				else if ((vertical == 0) && (horizontal == -7)) {
+				} else if ((vertical == 0) && (horizontal == -7)) {
 					putSingleCoords(structure, boardWidth, boardHeight, c2D, vertical, horizontal);
-				}
-				else if ((vertical == 2) && (horizontal == -7)) {
+				} else if ((vertical == 2) && (horizontal == -7)) {
 					putSingleCoords(structure, boardWidth, boardHeight, c2D, vertical, horizontal);
-				}
-				else if ((vertical == 0) && (horizontal == -16)) {
+				} else if ((vertical == 0) && (horizontal == -16)) {
 					putSingleCoords(structure, boardWidth, boardHeight, c2D, vertical, horizontal);
-				}
-				else if ((vertical == 1) && (horizontal == -16)) {
+				} else if ((vertical == 1) && (horizontal == -16)) {
 					putSingleCoords(structure, boardWidth, boardHeight, c2D, vertical, horizontal);
-				}
-				else if ((vertical == 0) && (horizontal == -17)) {
+				} else if ((vertical == 0) && (horizontal == -17)) {
 					putSingleCoords(structure, boardWidth, boardHeight, c2D, vertical, horizontal);
-				}
-				else if ((vertical == 1) && (horizontal == -17)) {
+				} else if ((vertical == 1) && (horizontal == -17)) {
 					putSingleCoords(structure, boardWidth, boardHeight, c2D, vertical, horizontal);
-				}
-				else if ((vertical == 0) && (horizontal == 3)) {
+				} else if ((vertical == 0) && (horizontal == 3)) {
 					putSingleCoords(structure, boardWidth, boardHeight, c2D, vertical, horizontal);
-				}
-				else if ((vertical == -1) && (horizontal == 3)) {
+				} else if ((vertical == -1) && (horizontal == 3)) {
 					putSingleCoords(structure, boardWidth, boardHeight, c2D, vertical, horizontal);
-				}
-				else if ((vertical == -2) && (horizontal == 3)) {
+				} else if ((vertical == -2) && (horizontal == 3)) {
 					putSingleCoords(structure, boardWidth, boardHeight, c2D, vertical, horizontal);
-				}
-				else if ((vertical == 0) && (horizontal == 4)) {
+				} else if ((vertical == 0) && (horizontal == 4)) {
 					putSingleCoords(structure, boardWidth, boardHeight, c2D, vertical, horizontal);
-				}
-				else if ((vertical == -1) && (horizontal == 4)) {
+				} else if ((vertical == -1) && (horizontal == 4)) {
 					putSingleCoords(structure, boardWidth, boardHeight, c2D, vertical, horizontal);
-				}
-				else if ((vertical == -2) && (horizontal == 4)) {
+				} else if ((vertical == -2) && (horizontal == 4)) {
 					putSingleCoords(structure, boardWidth, boardHeight, c2D, vertical, horizontal);
-				}
-				else if ((vertical == 1) && (horizontal == 5)) {
+				} else if ((vertical == 1) && (horizontal == 5)) {
 					putSingleCoords(structure, boardWidth, boardHeight, c2D, vertical, horizontal);
-				}
-				else if ((vertical == -3) && (horizontal == 5)) {
+				} else if ((vertical == -3) && (horizontal == 5)) {
 					putSingleCoords(structure, boardWidth, boardHeight, c2D, vertical, horizontal);
-				}
-				else if ((vertical == 1) && (horizontal == 7)) {
+				} else if ((vertical == 1) && (horizontal == 7)) {
 					putSingleCoords(structure, boardWidth, boardHeight, c2D, vertical, horizontal);
-				}
-				else if ((vertical == -3) && (horizontal == 7)) {
+				} else if ((vertical == -3) && (horizontal == 7)) {
 					putSingleCoords(structure, boardWidth, boardHeight, c2D, vertical, horizontal);
-				}
-				else if ((vertical == 2) && (horizontal == 7)) {
+				} else if ((vertical == 2) && (horizontal == 7)) {
 					putSingleCoords(structure, boardWidth, boardHeight, c2D, vertical, horizontal);
-				}
-				else if ((vertical == -4) && (horizontal == 7)) {
+				} else if ((vertical == -4) && (horizontal == 7)) {
 					putSingleCoords(structure, boardWidth, boardHeight, c2D, vertical, horizontal);
-				}
-				else if ((vertical == -1) && (horizontal == 17)) {
+				} else if ((vertical == -1) && (horizontal == 17)) {
 					putSingleCoords(structure, boardWidth, boardHeight, c2D, vertical, horizontal);
-				}
-				else if ((vertical == -2) && (horizontal == 17)) {
+				} else if ((vertical == -2) && (horizontal == 17)) {
 					putSingleCoords(structure, boardWidth, boardHeight, c2D, vertical, horizontal);
-				}
-				else if ((vertical == -1) && (horizontal == 18)) {
+				} else if ((vertical == -1) && (horizontal == 18)) {
 					putSingleCoords(structure, boardWidth, boardHeight, c2D, vertical, horizontal);
-				}
-				else if ((vertical == -2) && (horizontal == 18)) {
+				} else if ((vertical == -2) && (horizontal == 18)) {
 					putSingleCoords(structure, boardWidth, boardHeight, c2D, vertical, horizontal);
 				}
 				continue;
 			}
 		}
 	}
-	
-	private void createGlider(CellCoordinates coords, Map<CellCoordinates, CellState> structure, int boardHeight, int boardWidth) {
+
+	private void createGlider(CellCoordinates coords, Map<CellCoordinates, CellState> structure, int boardHeight,
+			int boardWidth) {
 		Coords2D c2D = (Coords2D) coords;
 		int range = 1;
 		for (int vertical = -range; vertical <= range; vertical++) {
@@ -233,7 +199,9 @@ public class Structure {
 			}
 		}
 	}
-	private void createOrGate(CellCoordinates coords, Map<CellCoordinates, CellState> structure, int boardHeight, int boardWidth) {
+
+	private void createOrGate(CellCoordinates coords, Map<CellCoordinates, CellState> structure, int boardHeight,
+			int boardWidth) {
 		Coords2D c2D = (Coords2D) coords;
 		int rangeH = 2;
 		int rangeV = 3;
@@ -242,86 +210,67 @@ public class Structure {
 			for (int horizontal = -rangeH; horizontal <= rangeH; horizontal++) {
 				if ((vertical == 0) && (horizontal == 0)) {
 					continue;
-				}
-				else if ((vertical == -2) && (horizontal == 0)) {
+				} else if ((vertical == -2) && (horizontal == 0)) {
 					continue;
-				}
-				else if ((vertical == -3) && (horizontal == 0)) {
+				} else if ((vertical == -3) && (horizontal == 0)) {
 					continue;
-				}
-				else if ((vertical == 2) && (horizontal == 0)) {
+				} else if ((vertical == 2) && (horizontal == 0)) {
 					continue;
-				}
-				else if ((vertical == 3) && (horizontal == 0)) {
+				} else if ((vertical == 3) && (horizontal == 0)) {
 					continue;
-				}
-				else if ((vertical == 0) && (horizontal == -1)) {
+				} else if ((vertical == 0) && (horizontal == -1)) {
 					continue;
-				}
-				else if ((vertical == -3) && (horizontal == -1)) {
+				} else if ((vertical == -3) && (horizontal == -1)) {
 					continue;
-				}
-				else if ((vertical == 3) && (horizontal == -1)) {
+				} else if ((vertical == 3) && (horizontal == -1)) {
 					continue;
-				}
-				else if ((vertical == -2) && (horizontal == -2)) {
+				} else if ((vertical == -2) && (horizontal == -2)) {
 					continue;
-				}
-				else if ((vertical == 2) && (horizontal == -2)) {
+				} else if ((vertical == 2) && (horizontal == -2)) {
 					continue;
-				}
-				else if ((vertical == -3) && (horizontal == 1)) {
+				} else if ((vertical == -3) && (horizontal == 1)) {
 					continue;
-				}
-				else if ((vertical == 3) && (horizontal == 1)) {
+				} else if ((vertical == 3) && (horizontal == 1)) {
 					continue;
-				}
-				else if ((vertical == -2) && (horizontal == 1)) {
+				} else if ((vertical == -2) && (horizontal == 1)) {
 					continue;
-				}
-				else if ((vertical == 2) && (horizontal == 1)) {
+				} else if ((vertical == 2) && (horizontal == 1)) {
 					continue;
-				}
-				else if ((vertical == -3) && (horizontal == 2)) {
+				} else if ((vertical == -3) && (horizontal == 2)) {
 					continue;
-				}
-				else if ((vertical == 3) && (horizontal == 2)) {
+				} else if ((vertical == 3) && (horizontal == 2)) {
 					continue;
-				}
-				else if ((vertical == -2) && (horizontal == 2)) {
+				} else if ((vertical == -2) && (horizontal == 2)) {
 					continue;
-				}
-				else if ((vertical == 2) && (horizontal == 2)) {
+				} else if ((vertical == 2) && (horizontal == 2)) {
 					continue;
-				}
-				else if ((vertical == -1) && (horizontal == 2)) {
+				} else if ((vertical == -1) && (horizontal == 2)) {
 					continue;
-				}
-				else if ((vertical == 1) && (horizontal == 2)) {
+				} else if ((vertical == 1) && (horizontal == 2)) {
 					continue;
 				}
 				putSingleCoords(structure, boardWidth, boardHeight, c2D, vertical, horizontal);
 			}
 		}
 	}
-	
-	
-	private void putSingleCoords(Map<CellCoordinates, CellState> structure, int boardWidth, int boardHeight, Coords2D c2D, int vertical,	int horizontal) {
+
+	private void putSingleCoords(Map<CellCoordinates, CellState> structure, int boardWidth, int boardHeight,
+			Coords2D c2D, int vertical, int horizontal) {
 		int newX;
 		int newY;
-		int distanceToNeighbor =1;
+		int distanceToNeighbor = 1;
 		boolean boardWrapped = BoardType.boardWrapped;
 		newX = c2D.getX() + distanceToNeighbor * horizontal;
 
-		if ((newX<0)||(newX>boardWidth)) {
-			if (!boardWrapped){
+		if ((newX < 0) || (newX > boardWidth)) {
+			if (!boardWrapped) {
 				return;
 			}
 			newX = wrapCoordinates(newX, boardWidth);
 		}
 		newY = c2D.getY() + distanceToNeighbor * vertical;
-		if ((newY<0)||(newY>boardHeight)) {
-			if (!boardWrapped){
+		if ((newY < 0) || (newY > boardHeight)) {
+			if (!boardWrapped) {
 				return;
 			}
 			newY = wrapCoordinates(newY, boardHeight);
@@ -331,11 +280,10 @@ public class Structure {
 	}
 
 	private int wrapCoordinates(int coord, int boardSize) {
-		if(coord>boardSize){
-			coord = coord-boardSize;
-		}
-		else{
-			coord = boardSize+coord;
+		if (coord > boardSize) {
+			coord = coord - boardSize;
+		} else {
+			coord = boardSize + coord;
 		}
 		return coord;
 	}

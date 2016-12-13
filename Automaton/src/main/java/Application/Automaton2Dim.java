@@ -10,72 +10,74 @@ public abstract class Automaton2Dim extends Automaton {
 	private int width = 40;
 	private int height = 40;
 	private int distanceToNeighbor = 1;
-	
-	//ADDED//
+
+	// ADDED//
 	private int firstCellX = distanceToNeighbor;
 	private int lastCellX = width;
 	private int firstCellY = distanceToNeighbor;
 	private int lastCellY = height;
-	//END//
-	
+	// END//
+
 	@Override
-	protected boolean hasNextCoordinates(CellCoordinates coords) throws UndefiniedInstanceOfCellException{
-		if(coords instanceof Coords2D){
-			if(xIsOutOfBoard(((Coords2D) coords).getX()+distanceToNeighbor)){
-				if(yIsOutOfBoard(((Coords2D) coords).getY()+distanceToNeighbor)){
+	protected boolean hasNextCoordinates(CellCoordinates coords) throws UndefiniedInstanceOfCellException {
+		if (coords instanceof Coords2D) {
+			if (xIsOutOfBoard(((Coords2D) coords).getX() + distanceToNeighbor)) {
+				if (yIsOutOfBoard(((Coords2D) coords).getY() + distanceToNeighbor)) {
 					return false;
 				}
 			}
 			return true;
-		}	
-		else{
+		} else {
 			throw new UndefiniedInstanceOfCellException("Incorrect instance of CellCoordinates.");
 		}
 	}
 
 	@Override
-	protected CellCoordinates initialCoordinates(){
-		CellCoordinates coords = new Coords2D(firstCellX-distanceToNeighbor, firstCellY);
-		return coords;	
+	protected CellCoordinates initialCoordinates() {
+		CellCoordinates coords = new Coords2D(firstCellX - distanceToNeighbor, firstCellY);
+		return coords;
 	}
-	
+
 	@Override
-	protected CellCoordinates nextCoordinates(CellCoordinates coords) throws UndefiniedInstanceOfCellException, CoordinatesOutOfBoardException{
-		if(coords instanceof Coords2D){
-			if(xIsOutOfBoard(((Coords2D) coords).getX()+distanceToNeighbor)){
-				CellCoordinates newCoords = new Coords2D(firstCellX,((Coords2D) coords).getY()+distanceToNeighbor);
-				return newCoords;	
+	protected CellCoordinates nextCoordinates(CellCoordinates coords)
+			throws UndefiniedInstanceOfCellException, CoordinatesOutOfBoardException {
+		if (coords instanceof Coords2D) {
+			if (xIsOutOfBoard(((Coords2D) coords).getX() + distanceToNeighbor)) {
+				CellCoordinates newCoords = new Coords2D(firstCellX, ((Coords2D) coords).getY() + distanceToNeighbor);
+				return newCoords;
 			}
-			CellCoordinates newCoords = new Coords2D(((Coords2D) coords).getX()+distanceToNeighbor,((Coords2D) coords).getY());
-			return newCoords;	
-		}
-		else{
+			CellCoordinates newCoords = new Coords2D(((Coords2D) coords).getX() + distanceToNeighbor,
+					((Coords2D) coords).getY());
+			return newCoords;
+		} else {
 			throw new UndefiniedInstanceOfCellException("Incorrect instance of CellCoordinates.");
 		}
 	}
-	
-	//ADDED//
+
+	// ADDED//
 	public int getWidth() {
 		return width;
 	}
+
 	public int getHeight() {
 		return height;
 	}
-	public boolean xIsOutOfBoard(int x){
-		if(x>lastCellX)
+
+	public boolean xIsOutOfBoard(int x) {
+		if (x > lastCellX)
 			return true;
-		if(x<firstCellX)
-			return true;
-		return false;
-	}
-	public boolean yIsOutOfBoard(int y){
-		if(y>lastCellY)
-			return true;
-		if(y<firstCellY)
+		if (x < firstCellX)
 			return true;
 		return false;
 	}
-	//END//
-	
-	
+
+	public boolean yIsOutOfBoard(int y) {
+		if (y > lastCellY)
+			return true;
+		if (y < firstCellY)
+			return true;
+		return false;
+	}
+	// END//
+
 }

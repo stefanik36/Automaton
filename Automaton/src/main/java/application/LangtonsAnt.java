@@ -34,8 +34,8 @@ public class LangtonsAnt extends Automaton2Dim {
 	// ADDED//
 	public static List<LangtonCell> ants = new ArrayList<LangtonCell>();
 	private Structure structureType;
-	//END//
-	
+	// END//
+
 	public LangtonsAnt() {
 
 	}
@@ -231,11 +231,11 @@ public class LangtonsAnt extends Automaton2Dim {
 	}
 
 	private int checkCoordinates1(int turn, int coords0, int coords1, int coords2, int coords3, int it0) {
-		if (coords0 - 2 * turn == coords1) 
+		if (coords0 - 2 * turn == coords1)
 			return it0;
 		if (coords0 - 2 * turn == coords2)
 			return it0;
-		if (coords0 - 2 * turn == coords3) 
+		if (coords0 - 2 * turn == coords3)
 			return it0;
 		return -1;
 	}
@@ -243,16 +243,16 @@ public class LangtonsAnt extends Automaton2Dim {
 	private int checkCoordinates2(int turn, int coords0, int coords1, int coords2, int coords3, int it0, int it1,
 			int it2, int it3) {
 		if (coords0 + 1 * turn == coords1) {
-			if (coords0 + 1 * turn == coords2) 
+			if (coords0 + 1 * turn == coords2)
 				return it3;
-			if (coords0 + 1 * turn == coords3) 
+			if (coords0 + 1 * turn == coords3)
 				return it2;
 			return it1;
 		}
 		if (coords0 + 1 * turn == coords2) {
-			if (coords0 + 1 * turn == coords3) 
+			if (coords0 + 1 * turn == coords3)
 				return it1;
-			if (coords0 + 1 * turn == coords1) 
+			if (coords0 + 1 * turn == coords1)
 				return it3;
 			return it2;
 		}

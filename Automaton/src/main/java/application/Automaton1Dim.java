@@ -11,39 +11,39 @@ public abstract class Automaton1Dim extends Automaton {
 	private int distanceToNeighbor = 1;
 	private int firstCellX = distanceToNeighbor;
 	private int lastCellX = width;
-	
+
 	@Override
-	protected boolean hasNextCoordinates(CellCoordinates coords) throws UndefiniedInstanceOfCellException{
-		if(coords instanceof Coords1D){
-			if(xIsOutOfBoard(((Coords1D) coords).getX()+distanceToNeighbor)){
+	protected boolean hasNextCoordinates(CellCoordinates coords) throws UndefiniedInstanceOfCellException {
+		if (coords instanceof Coords1D) {
+			if (xIsOutOfBoard(((Coords1D) coords).getX() + distanceToNeighbor)) {
 				return false;
 			}
-		}	
-		else{
+		} else {
 			throw new UndefiniedInstanceOfCellException("Incorrect instance of CellCoordinates.");
 		}
 		return true;
 	}
-	
+
 	@Override
-	protected CellCoordinates initialCoordinates(){
-		CellCoordinates coords = new Coords1D(firstCellX-distanceToNeighbor);
-		return coords;	
+	protected CellCoordinates initialCoordinates() {
+		CellCoordinates coords = new Coords1D(firstCellX - distanceToNeighbor);
+		return coords;
 	}
-	
+
 	@Override
-	protected CellCoordinates nextCoordinates(CellCoordinates coords) throws UndefiniedInstanceOfCellException, CoordinatesOutOfBoardException{
-		return new Coords1D(((Coords1D)coords).getX()+distanceToNeighbor);
+	protected CellCoordinates nextCoordinates(CellCoordinates coords)
+			throws UndefiniedInstanceOfCellException, CoordinatesOutOfBoardException {
+		return new Coords1D(((Coords1D) coords).getX() + distanceToNeighbor);
 	}
-	
+
 	public int getWidth() {
 		return width;
 	}
-	
-	public boolean xIsOutOfBoard(int x){
-		if(x>lastCellX)
+
+	public boolean xIsOutOfBoard(int x) {
+		if (x > lastCellX)
 			return true;
-		if(x<firstCellX)
+		if (x < firstCellX)
 			return true;
 		return false;
 	}

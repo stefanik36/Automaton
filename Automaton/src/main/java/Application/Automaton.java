@@ -24,122 +24,139 @@ import states.CellState;
 import states.CellStateFactory;
 
 public abstract class Automaton {
-	
 
-	//ADDED//
+	// ADDED//
 	public int neighborhood_range = 1;
 	private static boolean isPlaying;
-	//END//
+	// END//
 
-	private Map<CellCoordinates, CellState> cells = new HashMap<CellCoordinates, CellState> (); 
+	private Map<CellCoordinates, CellState> cells = new HashMap<CellCoordinates, CellState>();
 	private CellNeighborhood neighborsStrategy;
 	private CellStateFactory stateFactory;
-	
-	//ADDED//
-	public static boolean isPlaying(){
+
+	// ADDED//
+	public static boolean isPlaying() {
 		return isPlaying;
 	}
 
 	public static void setIsPlaying(boolean b) {
 		isPlaying = b;
 	}
-	public void setNeighborhoodAndstateFactory(CellNeighborhood neighborsStrategy, CellStateFactory stateFactory){
+
+	public void setNeighborhoodAndstateFactory(CellNeighborhood neighborsStrategy, CellStateFactory stateFactory) {
 		this.stateFactory = stateFactory;
 		setNeighborhood(neighborsStrategy);
 	}
-	public void setNeighborhood(CellNeighborhood neighborsStrategy){
+
+	public void setNeighborhood(CellNeighborhood neighborsStrategy) {
 		this.neighborsStrategy = neighborsStrategy;
 	}
-	public CellStateFactory getStateFactory(){
+
+	public CellStateFactory getStateFactory() {
 		return stateFactory;
 	}
-	public CellNeighborhood getNeighborsStrategy(){
+
+	public CellNeighborhood getNeighborsStrategy() {
 		return neighborsStrategy;
 	}
-	//END//
-	
-	public class CellIterator implements Iterator<Cell> { 
-		
+	// END//
+
+	public class CellIterator implements Iterator<Cell> {
+
 		private CellCoordinates currentCoords;
-		//ADDED//
+		// ADDED//
 		Iterator<Map.Entry<CellCoordinates, CellState>> it = cells.entrySet().iterator();
-		//END//
-		
-		public boolean hasNext(){
-			if(it.hasNext())
+		// END//
+
+		public boolean hasNext() {
+			if (it.hasNext())
 				return true;
 			return false;
 		}
-		
-		public Cell next(){
+
+		public Cell next() {
 			Map.Entry<CellCoordinates, CellState> pair = it.next();
-			CellState state = (CellState)pair.getValue();
-			currentCoords = (CellCoordinates)pair.getKey();
+			CellState state = (CellState) pair.getValue();
+			currentCoords = (CellCoordinates) pair.getKey();
 			return new Cell(currentCoords, state);
 		}
-		
-		public void setState(CellState newState) throws InvalidCellCoordinatesInstanceException, InvalidGameInstance{
-			setCellState(currentCoords, newState); 
+
+		public void setState(CellState newState) throws InvalidCellCoordinatesInstanceException, InvalidGameInstance {
+			setCellState(currentCoords, newState);
 		}
-		public void reset(){
+
+		public void reset() {
 			it = cells.entrySet().iterator();
 		}
 	}
-	
-	//ADDED//
-	public Set<CellCoordinates> cellNeighbors(CellCoordinates coords){
+
+	// ADDED//
+	public Set<CellCoordinates> cellNeighbors(CellCoordinates coords) {
 		return neighborsStrategy.cellNeighborhood(coords);
 	}
-	public void setCellState(CellCoordinates coords, CellState newState) throws InvalidCellCoordinatesInstanceException, InvalidGameInstance{
+
+	public void setCellState(CellCoordinates coords, CellState newState)
+			throws InvalidCellCoordinatesInstanceException, InvalidGameInstance {
 		cells.put(coords, newState);
 	}
-	protected void putCell(CellCoordinates coords, CellState newState) throws InvalidCellStateFactoryException, InvalidGameInstance, InvalidCellCoordinatesInstanceException{            // --------------------- add cell from game of life ------------//
+
+	protected void putCell(CellCoordinates coords, CellState newState)
+			throws InvalidCellStateFactoryException, InvalidGameInstance, InvalidCellCoordinatesInstanceException { // ---------------------
+																													// add
+																													// cell
+																													// from
+																													// game
+																													// of
+																													// life
+																													// ------------//
 		cells.put(coords, newState);
 	}
-	//END//
-	
-	public Automaton nextState() throws InvalidCellStateInstance, NewStateIteratorHasNotNextException, InvalidCellCoordinatesInstanceException, InvalidGameInstance{
+	// END//
+
+	public Automaton nextState() throws InvalidCellStateInstance, NewStateIteratorHasNotNextException,
+			InvalidCellCoordinatesInstanceException, InvalidGameInstance {
 		Automaton automaton = newInstance(stateFactory, neighborsStrategy);
-		
-		CellIterator newStateIterator = automaton.cellIterator();	
+
+		CellIterator newStateIterator = automaton.cellIterator();
 		CellIterator thisIterator = cellIterator();
-		
-		while(thisIterator.hasNext()){
+
+		while (thisIterator.hasNext()) {
 			Cell c = thisIterator.next();
-			if(newStateIterator.hasNext()){
+			if (newStateIterator.hasNext()) {
 				newStateIterator.next();
-			}
-			else{
+			} else {
 				throw new NewStateIteratorHasNotNextException("Iterator has not next cell.");
 			}
 			Set<CellCoordinates> neighbors = cellNeighbors(c.coords);
 			Set<Cell> mappedNeighbors = mapCoordinates(neighbors);
 			CellState newState = nextCellState(c.state, mappedNeighbors);
-			newStateIterator.setState(newState);		
+			newStateIterator.setState(newState);
 		}
-		
+
 		return automaton;
 	}
-	public void insertStructure(Map<? extends CellCoordinates, ? extends CellState> structure) throws InvalidGameInstance, InvalidCellStateInstance{
+
+	public void insertStructure(Map<? extends CellCoordinates, ? extends CellState> structure)
+			throws InvalidGameInstance, InvalidCellStateInstance {
 		for (Entry<? extends CellCoordinates, ? extends CellState> pair : structure.entrySet()) {
 			CellCoordinates coords = pair.getKey();
 			CellState state = cells.get(coords);
-			if(state == null){
+			if (state == null) {
 				break;
 			}
 			state = state.getOppositeState();
 			cells.put(coords, state);
 		}
 	}
-	
-	public CellIterator cellIterator(){
+
+	public CellIterator cellIterator() {
 		return new CellIterator();
 	}
-	
-	private Set<Cell> mapCoordinates(Set<CellCoordinates> coords ){
-		Set<Cell> cellSet = new HashSet<Cell>();		
 
-		for(CellCoordinates coord : coords){
+	private Set<Cell> mapCoordinates(Set<CellCoordinates> coords) {
+		Set<Cell> cellSet = new HashSet<Cell>();
+
+		for (CellCoordinates coord : coords) {
 			CellState state = cells.get(coord);
 			Cell c = new Cell(coord, state);
 			cellSet.add(c);
@@ -148,29 +165,38 @@ public abstract class Automaton {
 	}
 
 	protected abstract Automaton newInstance(CellStateFactory cellStateFactory, CellNeighborhood cellNeighboorhood);
-	
-	protected abstract boolean hasNextCoordinates(CellCoordinates coords) 
-			throws UndefiniedInstanceOfCellException;//----------added exception -----------//
-	
+
+	protected abstract boolean hasNextCoordinates(CellCoordinates coords) throws UndefiniedInstanceOfCellException;// ----------added
+																													// exception
+																													// -----------//
+
 	protected abstract CellCoordinates initialCoordinates();
-	
-	protected abstract CellCoordinates nextCoordinates(CellCoordinates coords) 
-			throws UndefiniedInstanceOfCellException, CoordinatesOutOfBoardException;//-----------added exception ------//
-	
-	protected abstract CellState nextCellState(CellState currentState, Set<Cell> neighborsStates) 
-			throws InvalidCellStateInstance;//-----------added exception ------//
-	
-	//ADDED//
-	public abstract Map<? extends CellCoordinates, ? extends CellState> getStructure(CellCoordinates cellCoords) throws InvalidStructureTypeException, InvalidGameInstance;
+
+	protected abstract CellCoordinates nextCoordinates(CellCoordinates coords)
+			throws UndefiniedInstanceOfCellException, CoordinatesOutOfBoardException;// -----------added
+																						// exception
+																						// ------//
+
+	protected abstract CellState nextCellState(CellState currentState, Set<Cell> neighborsStates)
+			throws InvalidCellStateInstance;// -----------added exception
+											// ------//
+
+	// ADDED//
+	public abstract Map<? extends CellCoordinates, ? extends CellState> getStructure(CellCoordinates cellCoords)
+			throws InvalidStructureTypeException, InvalidGameInstance;
+
 	public abstract StructureType getStructureType();
+
 	public abstract void setStructureType(Structure structureType);
+
 	public abstract void fillTheMap(CellStateFactory cellStateFactory);
+
 	public abstract Group getCellShape(Cell c) throws InvalidCellCoordinatesInstanceException;
-	
-	public Group getCellsGroup(){
+
+	public Group getCellsGroup() {
 		Group cellsGroup = new Group();
 		CellIterator thisIterator = cellIterator();
-		while(thisIterator.hasNext()){
+		while (thisIterator.hasNext()) {
 			Cell c = thisIterator.next();
 			try {
 				cellsGroup.getChildren().add(getCellShape(c));
@@ -180,10 +206,11 @@ public abstract class Automaton {
 		}
 		return cellsGroup;
 	}
-	public Map<CellCoordinates, CellState> GetActualCellStates(){
+
+	public Map<CellCoordinates, CellState> GetActualCellStates() {
 		return cells;
 	}
-	
+
 	public abstract void setStructure(StructureType struct);
-	//END//
+	// END//
 }
