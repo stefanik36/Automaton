@@ -5,7 +5,6 @@ import states.CellState;
 
 public class Cell {
 
-	
 	public CellState state;
 	public CellCoordinates coords;
 	
@@ -22,7 +21,6 @@ public class Cell {
 		result = prime * result + ((coords == null) ? 0 : coords.hashCode());
 		return result;
 	}
-	
 	
 	//ADDED//
 	@Override
