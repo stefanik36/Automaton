@@ -27,7 +27,8 @@ public class Coords2D implements CellCoordinates{
 		int result = 1;
 		result = prime * result +  Integer.valueOf(x).hashCode();
 		result = prime * result +  Integer.valueOf(y).hashCode();
-		result = result*x;
+//		result = result*x;
+//		result = result*y;
 		return result;
 	}
 	

@@ -6,8 +6,8 @@ import gui.AutomatonGUI;
 public class PointPosition {
 	public static int leftEdge = 0;
 	public static int rightEdge = AutomatonGUI.AUTOMATON_WIDTH;
-	public static int topEdge = AutomatonGUI.MENU_HEIGHT;
-	public static int bottomEdge = AutomatonGUI.AUTOMATON_HEIGHT+AutomatonGUI.MENU_HEIGHT;
+	public static int topEdge = 0;//AutomatonGUI.MENU_HEIGHT;
+	public static int bottomEdge = AutomatonGUI.AUTOMATON_HEIGHT;//+AutomatonGUI.MENU_HEIGHT;
 	
 	public static CellCoordinates setCellCoordinates(int x, int y) throws InvalidCellCoordinatesInstanceException{
 		CellCoordinates result;
@@ -20,9 +20,16 @@ public class PointPosition {
 		posX = posX/AutomatonGUI.DISTANCE_TO_NEIGHBORS +1;
 		posY = posY/AutomatonGUI.DISTANCE_TO_NEIGHBORS +1;
 //		System.out.println("after: "+posX+" "+posY);
+		
 		result = new Coords2D(posX, posY);
-
+		
 		return result;
+		
+	}
+	public static CellCoordinates setCellCoordinates1D(int x, int y) throws InvalidCellCoordinatesInstanceException{
+		Coords2D c2D = (Coords2D) setCellCoordinates(x, y);
+		CellCoordinates c1D = new Coords1D(c2D.getX());
+		return c1D;
 		
 	}
 	
@@ -78,7 +85,7 @@ public class PointPosition {
 	   		while(right<=endEdge){
 	   			if(x>=left){
 	   				if(x<=right){
-	   					System.out.println(posX);
+//	   					System.out.println(posX);
 	   					return posX;
 	   				}
 	   			}
@@ -87,7 +94,7 @@ public class PointPosition {
 	   			posX = posX + AutomatonGUI.DISTANCE_TO_NEIGHBORS;
 	   		}
 	   	}
-		return -AutomatonGUI.DISTANCE_TO_NEIGHBORS;		
+		return -AutomatonGUI.DISTANCE_TO_NEIGHBORS*100;		
 	}
 	 
 	 

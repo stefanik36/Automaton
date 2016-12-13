@@ -17,7 +17,7 @@ public class Coords1D implements CellCoordinates{
 	}
 	@Override
 	public boolean equals(Object obj){
-		Coords2D coords = (Coords2D) obj;
+		Coords1D coords = (Coords1D) obj;
 		if(this.x == coords.x){
 			return true;
 		}

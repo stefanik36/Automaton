@@ -7,6 +7,8 @@ import coordinates.CellCoordinates;
 import coordinates.Coords1D;
 import coordinates.Coords2D;
 import exceptions.UndefiniedInstanceOfCellException;
+import states.BinaryState;
+import states.UniformStateFactory;
 
 import java.util.HashSet;
 
@@ -31,7 +33,7 @@ public class MoorNeighborhood implements CellNeighborhood{
 		Set<CellCoordinates> cellNeighbors = new HashSet<CellCoordinates>();   // -------------------------------HASH SET ------------------------//
 		
 		if(cell instanceof Coords2D){//------------------------------------------------- instanceof ----------------------------------//
-			Automaton2Dim gameOfLife = new GameOfLife();   //------------------ board dimension --------------------//
+			Automaton2Dim gameOfLife = new GameOfLife(new UniformStateFactory(BinaryState.DEAD), new MoorNeighborhood(1));   //------------------ board dimension --------------------//
 			Coords2D cell2D = (Coords2D) cell;
 			int newX, newY;
 			int boardHeight = gameOfLife.getHeight();
@@ -56,10 +58,10 @@ public class MoorNeighborhood implements CellNeighborhood{
 					}
 					CellCoordinates coords = new Coords2D(newX, newY);
 					cellNeighbors.add(coords);					
-					System.out.println(coords+"        size: "+cellNeighbors.size());
+//					System.out.println(coords+"        size: "+cellNeighbors.size());
 				}
 			}	
-			System.out.println("end");
+//			System.out.println("end");
 		}
 		else if(cell instanceof Coords1D){
 			Coords1D cell1D = (Coords1D) cell;

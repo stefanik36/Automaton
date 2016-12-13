@@ -10,6 +10,8 @@ import coordinates.CellCoordinates;
 import coordinates.Coords1D;
 import coordinates.Coords2D;
 import exceptions.UndefiniedInstanceOfCellException;
+import states.BinaryState;
+import states.UniformStateFactory;
 
 import java.util.HashSet;
 
@@ -33,7 +35,7 @@ public class VonNeumanNeighborhood implements CellNeighborhood{
 		Set<CellCoordinates> cellNeighbors = new HashSet<CellCoordinates>();   // -------------------------------HASH SET ------------------------//
 		
 		if(cell instanceof Coords2D){//------------------------------------------------- instanceof ----------------------------------//
-			Automaton2Dim gameOfLife = new GameOfLife();   //------------------ board dimension --------------------//
+			Automaton2Dim gameOfLife = new GameOfLife(new UniformStateFactory(BinaryState.DEAD), new MoorNeighborhood(1)); //------------------ board dimension --------------------//
 			Coords2D cell2D = (Coords2D) cell;
 			int newX, newY;
 			int i=0;
