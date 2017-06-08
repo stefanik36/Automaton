@@ -88,7 +88,7 @@ public class AutomatonGUI extends Application {
 	// END//
 
 	// STYLE//
-	private URL styleUrl;
+	// private URL styleUrl;
 	// END//
 
 	@Override
@@ -112,11 +112,11 @@ public class AutomatonGUI extends Application {
 
 	private void setRootPane() {
 		File file = new File("src/main/css/Roboto/Roboto-Black.ttf");
-		try {
-			styleUrl = file.toURI().toURL();
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			// styleUrl = file.toURI().toURL();
+//		} catch (MalformedURLException e) {
+//			e.printStackTrace();
+//		}
 		root = new VBox();
 		root.getStyleClass().clear();
 		root.getStyleClass().add("root");
@@ -153,7 +153,7 @@ public class AutomatonGUI extends Application {
 			}
 		});
 		Text t = new Text("Animation Speed: ");
-		t.setFont(Font.loadFont(styleUrl.toExternalForm(), 18));
+		// t.setFont(Font.loadFont(styleUrl.toExternalForm(), 18));
 		t.getStyleClass().add("btnLabel");
 		speedControler.getChildren().addAll(t, slider);
 		return speedControler;
@@ -165,7 +165,7 @@ public class AutomatonGUI extends Application {
 		btnExit.setPrefSize(100, 20);
 		btnExit.getStyleClass().clear();
 		btnExit.getStyleClass().add("button");
-		btnExit.setFont(Font.loadFont(styleUrl.toExternalForm(), 20));
+		// btnExit.setFont(Font.loadFont(styleUrl.toExternalForm(), 20));
 		btnExit.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -186,7 +186,7 @@ public class AutomatonGUI extends Application {
 		btnStart.setPrefSize(100, 20);
 		btnStart.getStyleClass().clear();
 		btnStart.getStyleClass().add("button");
-		btnStart.setFont(Font.loadFont(styleUrl.toExternalForm(), 20));
+		// btnStart.setFont(Font.loadFont(styleUrl.toExternalForm(), 20));
 		btnStart.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -214,7 +214,7 @@ public class AutomatonGUI extends Application {
 		btnclc.setPrefSize(100, 20);
 		btnclc.getStyleClass().clear();
 		btnclc.getStyleClass().add("button");
-		btnclc.setFont(Font.loadFont(styleUrl.toExternalForm(), 20));
+		// btnclc.setFont(Font.loadFont(styleUrl.toExternalForm(), 20));
 		btnclc.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -325,14 +325,14 @@ public class AutomatonGUI extends Application {
 		});
 
 		Text t = new Text("Structures: ");
-		t.setFont(Font.loadFont(styleUrl.toExternalForm(), 18));
+		// t.setFont(Font.loadFont(styleUrl.toExternalForm(), 18));
 		t.getStyleClass().add("btnLabel");
 
 		CheckBox checkBox = new CheckBox("Wrap Board");
 		checkBox.setPrefSize(100, 20);
 		checkBox.setSelected(true);
 		checkBox.getStyleClass().add("checkBox");
-		checkBox.setFont(Font.loadFont(styleUrl.toExternalForm(), 10));
+		// checkBox.setFont(Font.loadFont(styleUrl.toExternalForm(), 10));
 		checkBox.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -368,7 +368,7 @@ public class AutomatonGUI extends Application {
 		rb1.getStyleClass().add("radioButton");
 		rb2.getStyleClass().add("radioButton");
 
-		rb1.setFont(Font.loadFont(styleUrl.toExternalForm(), 14));
+		// rb1.setFont(Font.loadFont(styleUrl.toExternalForm(), 14));
 		rb1.setSelected(true);
 		rb1.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -385,7 +385,7 @@ public class AutomatonGUI extends Application {
 			}
 		});
 
-		rb2.setFont(Font.loadFont(styleUrl.toExternalForm(), 14));
+		// rb2.setFont(Font.loadFont(styleUrl.toExternalForm(), 14));
 		rb2.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -428,7 +428,7 @@ public class AutomatonGUI extends Application {
 		btnQL.setPrefSize(150, 20);
 		btnQL.getStyleClass().clear();
 		btnQL.getStyleClass().add("button");
-		btnQL.setFont(Font.loadFont(styleUrl.toExternalForm(), 20));
+		// btnQL.setFont(Font.loadFont(styleUrl.toExternalForm(), 20));
 		btnQL.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -456,7 +456,7 @@ public class AutomatonGUI extends Application {
 		List<Integer> comeAlive = animation.getCurrentComeAlive();
 		
 		Text t = new Text("Survivors: ");
-		t.setFont(Font.loadFont(styleUrl.toExternalForm(), 18));
+		// t.setFont(Font.loadFont(styleUrl.toExternalForm(), 18));
 		t.getStyleClass().add("btnLabel");
 		checkBoxesPanel.getChildren().add(t);
 		
@@ -465,7 +465,7 @@ public class AutomatonGUI extends Application {
 		
 		t = new Text("Come alive: ");
 		t.getStyleClass().add("btnLabel");
-		t.setFont(Font.loadFont(styleUrl.toExternalForm(), 18));
+		// t.setFont(Font.loadFont(styleUrl.toExternalForm(), 18));
 		checkBoxesPanel.getChildren().add(t);
 		
 		Pane p2 = createCheckBoxes(comeAlive, false);
@@ -490,7 +490,7 @@ public class AutomatonGUI extends Application {
 			}
 			final int it = i;
 			checkBox.getStyleClass().add("checkBox");
-			checkBox.setFont(Font.loadFont(styleUrl.toExternalForm(), 10));
+			// checkBox.setFont(Font.loadFont(styleUrl.toExternalForm(), 10));
 			checkBox.setOnAction(new EventHandler<ActionEvent>() {
 
 				@Override
@@ -723,7 +723,7 @@ public class AutomatonGUI extends Application {
 		});
 		
 		Text t = new Text("Rule: ");
-		t.setFont(Font.loadFont(styleUrl.toExternalForm(), 18));
+		// t.setFont(Font.loadFont(styleUrl.toExternalForm(), 18));
 		t.getStyleClass().add("btnLabel");
 		
 		controlers.getChildren().add(t);
@@ -744,7 +744,7 @@ public class AutomatonGUI extends Application {
 		gameOfLifeBtn.setPrefSize(200, 20);
 		gameOfLifeBtn.getStyleClass().clear();
 		gameOfLifeBtn.getStyleClass().add("button");
-		gameOfLifeBtn.setFont(Font.loadFont(styleUrl.toExternalForm(), 16));
+		// gameOfLifeBtn.setFont(Font.loadFont(styleUrl.toExternalForm(), 16));
 		gameOfLifeBtn.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -760,7 +760,7 @@ public class AutomatonGUI extends Application {
 		langtonsAnt.setPrefSize(200, 20);
 		langtonsAnt.getStyleClass().clear();
 		langtonsAnt.getStyleClass().add("button");
-		langtonsAnt.setFont(Font.loadFont(styleUrl.toExternalForm(), 16));
+		// langtonsAnt.setFont(Font.loadFont(styleUrl.toExternalForm(), 16));
 		langtonsAnt.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -777,7 +777,7 @@ public class AutomatonGUI extends Application {
 		wireworld.setPrefSize(200, 20);
 		wireworld.getStyleClass().clear();
 		wireworld.getStyleClass().add("button");
-		wireworld.setFont(Font.loadFont(styleUrl.toExternalForm(), 16));
+		// wireworld.setFont(Font.loadFont(styleUrl.toExternalForm(), 16));
 		wireworld.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -793,7 +793,7 @@ public class AutomatonGUI extends Application {
 		elementaryCellAutomaton.setPrefSize(200, 20);
 		elementaryCellAutomaton.getStyleClass().clear();
 		elementaryCellAutomaton.getStyleClass().add("button");
-		elementaryCellAutomaton.setFont(Font.loadFont(styleUrl.toExternalForm(), 16));
+		// elementaryCellAutomaton.setFont(Font.loadFont(styleUrl.toExternalForm(), 16));
 		elementaryCellAutomaton.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -809,7 +809,7 @@ public class AutomatonGUI extends Application {
 		quit.setPrefSize(200, 20);
 		quit.getStyleClass().clear();
 		quit.getStyleClass().add("button");
-		quit.setFont(Font.loadFont(styleUrl.toExternalForm(), 16));
+		// quit.setFont(Font.loadFont(styleUrl.toExternalForm(), 16));
 		quit.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
